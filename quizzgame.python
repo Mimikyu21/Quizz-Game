@@ -1,0 +1,77 @@
+#----------------------
+def new_game():
+    guesess = [] #for the guess
+    correct_guess = 0 #current correct guess
+    question_number = 1 #current number question
+
+    for key in question: #for print the question and answer using nested loop
+        print('--------------------------------------------------')
+        print(key)
+        for show in answers[question_number-1]:# to get 0 to call 2D list
+            print(show)
+
+        guess = input('Enter (A,B,C or D): ').upper()
+        guesess.append(guess)# to append the guess with guesse list
+
+        correct_guess += check_answer(question.get(key),guess) #call the function check answer and passing the argument
+        question_number += 1 # increment the output of question
+
+    display_score(correct_guess, guesess) # call the display score function
+#----------------------
+def check_answer(answer, guess): #parameter from key and user input
+    #to check if user input is correct if correct then add 1 point
+    if answer == guess:
+        print('CORRECT!')
+        return 1
+    else:
+        print('WRONG!')
+        return 0
+#----------------------
+def display_score(correct_guess,guesess):
+    print('--------------------------')
+    print('RESULTS')
+    print('--------------------------')
+
+    print("Answers: ", end='')
+    for i in question:
+        print(question.get(i),end=' ')
+    print()
+
+    print('Guesess: ', end='')
+    for i in guesess:
+        print(i,end=' ')
+    print()
+
+    score = int((correct_guess/len(question))*100) # calculate the answer into percentage point
+    print('Your Score is:'+ str(score)+'%')
+
+#----------------------
+def play_again(): #if user want to play again function
+    again = input("Want To Play Again Kiddo ? (yes/no): ").upper()
+    if again == 'YES':
+        return True
+    else:
+        return  False
+
+#dictionary for question and correct answer
+question = {'How Many Times FC Barcelona Won UCL ?: ': 'D',
+           'Wilhelmus is Natinal Anthem of Which Country ?: ': 'A',
+           'Who is The Goat of the Football ?: ':'B',
+           'Which Continent are Indonesian is ?: ': 'C'}
+
+#2d list for option answer
+answers = [['A. 3','B. 7', 'C. 10', 'D. 5'],
+           ['A. Netherlands', 'B. Japan', 'C. Uruguay', 'D. Germany'],
+           ['A. Ronaldo', 'B. Messi', 'C. Mbappe', 'D. Haaland',],
+           ['A. Asia', 'B. Afrika', "C. Australia", 'D. America']
+           ]
+
+#to start the game the game
+new_game()
+
+#to call the play again function
+while play_again():
+    new_game()
+
+
+print("Go Away Bitch!")
